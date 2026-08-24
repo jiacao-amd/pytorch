@@ -135,8 +135,8 @@ def evaluate_mask_program(
     return values[mask_program_output]
 
 
-def _schedule_group(mask: int, count: int, group: int):
-    fx.rocdl.sched_group_barrier(mask, count, group)
+def _schedule_group(kind: int | str, count: int, group: int):
+    fx.rocdl.sched_group_barrier(kind, count, group)
 
 
 def schedule_fence():
@@ -197,8 +197,8 @@ def schedule_fwd_softmax_pipeline(*, vmem_count: int):
     for slot in fx.range_constexpr(slots):
         scheduled_vmem = vmem_per_slot + int(slot < vmem_remainder)
         if const_expr(scheduled_vmem):
-            _schedule_group(_SCHED_VMEM_READ, scheduled_vmem, 1)
-        _schedule_group(_SCHED_EXP, 8, 1)
+            _schedule_group("vmem_read", scheduled_vmem, 1)
+        _schedule_group("transcendental", 8, 1)
     schedule_fence()
 
 
