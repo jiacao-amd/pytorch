@@ -17,6 +17,12 @@ _CAUSAL_DOCUMENT_MASK_PROGRAM = (
 # scheduler groups, a scheduler fence, native exp2, or readfirstlane. Keep
 # those calls centralized here so the kernels otherwise use the stable surface.
 _SCHED_MFMA, _SCHED_VMEM_READ, _SCHED_LDS_READ, _SCHED_EXP = (0x008, 0x020, 0x100, 0x400)
+_SCHED_GROUP_MASKS = {
+    "matrix_multiply": _SCHED_MFMA,
+    "vmem_read": _SCHED_VMEM_READ,
+    "lds_read": _SCHED_LDS_READ,
+    "transcendental": _SCHED_EXP,
+}
 
 
 def make_global_view(tensor, offset, shape, stride):
@@ -136,7 +142,8 @@ def evaluate_mask_program(
 
 
 def _schedule_group(kind: int | str, count: int, group: int):
-    fx.rocdl.sched_group_barrier(kind, count, group)
+    mask = _SCHED_GROUP_MASKS[kind] if isinstance(kind, str) else kind
+    fx.rocdl.sched_group_barrier(mask, count, group)
 
 
 def schedule_fence():

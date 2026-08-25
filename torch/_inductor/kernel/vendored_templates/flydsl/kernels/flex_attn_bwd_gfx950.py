@@ -551,7 +551,7 @@ def _build_flex_attn_bwd_module(
                 pb,
             )
 
-    @flyc.kernel
+    @flyc.kernel(known_block_size=[COMPUTE_NT, 1, 1])
     def compute_kernel(
         Q: fx.Tensor,
         K: fx.Tensor,
