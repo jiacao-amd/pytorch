@@ -1,0 +1,169 @@
+{
+  "schema_version": 1,
+  "suites": {
+    "minimax_forward": {
+      "cases": [
+        {
+          "id": "minimax_b1_h4_s1024_d128_causal",
+          "batch": 1,
+          "query_heads": 4,
+          "kv_heads": 4,
+          "query_sequence": 1024,
+          "kv_sequence": 1024,
+          "qk_head_dim": 128,
+          "v_head_dim": 128,
+          "mask": "causal",
+          "layout": "contiguous_bhsd"
+        },
+        {
+          "id": "minimax_b1_h4_s2048_d128_sliding_window",
+          "batch": 1,
+          "query_heads": 4,
+          "kv_heads": 4,
+          "query_sequence": 2048,
+          "kv_sequence": 2048,
+          "qk_head_dim": 128,
+          "v_head_dim": 128,
+          "mask": "sliding_window_causal",
+          "sliding_window": 128,
+          "layout": "contiguous_bhsd"
+        },
+        {
+          "id": "minimax_b1_h4_s2048_d128_document",
+          "batch": 1,
+          "query_heads": 4,
+          "kv_heads": 4,
+          "query_sequence": 2048,
+          "kv_sequence": 2048,
+          "qk_head_dim": 128,
+          "v_head_dim": 128,
+          "mask": "packed_document_causal",
+          "documents": 2,
+          "layout": "contiguous_bhsd"
+        },
+        {
+          "id": "minimax_b2_h32_s2048_d128_causal",
+          "batch": 2,
+          "query_heads": 32,
+          "kv_heads": 32,
+          "query_sequence": 2048,
+          "kv_sequence": 2048,
+          "qk_head_dim": 128,
+          "v_head_dim": 128,
+          "mask": "causal",
+          "layout": "contiguous_bhsd"
+        },
+        {
+          "id": "minimax_b2_h32_s4096_d128_causal",
+          "batch": 2,
+          "query_heads": 32,
+          "kv_heads": 32,
+          "query_sequence": 4096,
+          "kv_sequence": 4096,
+          "qk_head_dim": 128,
+          "v_head_dim": 128,
+          "mask": "causal",
+          "layout": "contiguous_bhsd"
+        },
+        {
+          "id": "minimax_b2_h32_s8192_d128_causal",
+          "batch": 2,
+          "query_heads": 32,
+          "kv_heads": 32,
+          "query_sequence": 8192,
+          "kv_sequence": 8192,
+          "qk_head_dim": 128,
+          "v_head_dim": 128,
+          "mask": "causal",
+          "layout": "contiguous_bhsd"
+        },
+        {
+          "id": "minimax_b2_h32_s16384_d128_causal",
+          "batch": 2,
+          "query_heads": 32,
+          "kv_heads": 32,
+          "query_sequence": 16384,
+          "kv_sequence": 16384,
+          "qk_head_dim": 128,
+          "v_head_dim": 128,
+          "mask": "causal",
+          "layout": "contiguous_bhsd"
+        }
+      ]
+    },
+    "dsv_training": {
+      "cases": [
+        {
+          "id": "dsv3_16b_b4_h16_s4096",
+          "model": "DSV3-16B",
+          "batch": 4,
+          "query_heads": 16,
+          "kv_heads": 16,
+          "query_sequence": 4096,
+          "kv_sequence": 4096,
+          "qk_head_dim": 192,
+          "v_head_dim": 128,
+          "mask": "packed_document_causal",
+          "documents": 2,
+          "layout": "torchtitan_transposed_bhsd"
+        },
+        {
+          "id": "dsv2_236b_b1_h128_s4096",
+          "model": "DSV2-236B",
+          "batch": 1,
+          "query_heads": 128,
+          "kv_heads": 128,
+          "query_sequence": 4096,
+          "kv_sequence": 4096,
+          "qk_head_dim": 192,
+          "v_head_dim": 128,
+          "mask": "packed_document_causal",
+          "documents": 2,
+          "layout": "torchtitan_transposed_bhsd"
+        },
+        {
+          "id": "dsv3_671b_b4_h128_s4096",
+          "model": "DSV3-671B",
+          "batch": 4,
+          "query_heads": 128,
+          "kv_heads": 128,
+          "query_sequence": 4096,
+          "kv_sequence": 4096,
+          "qk_head_dim": 192,
+          "v_head_dim": 128,
+          "mask": "packed_document_causal",
+          "documents": 2,
+          "layout": "torchtitan_transposed_bhsd"
+        },
+        {
+          "id": "dsv3_16b_b1_h16_s16384",
+          "model": "DSV3-16B",
+          "batch": 1,
+          "query_heads": 16,
+          "kv_heads": 16,
+          "query_sequence": 16384,
+          "kv_sequence": 16384,
+          "qk_head_dim": 192,
+          "v_head_dim": 128,
+          "mask": "packed_document_causal",
+          "documents": 2,
+          "layout": "torchtitan_transposed_bhsd"
+        },
+        {
+          "id": "dsv3_671b_b1_h128_s16384",
+          "model": "DSV3-671B",
+          "batch": 1,
+          "query_heads": 128,
+          "kv_heads": 128,
+          "query_sequence": 16384,
+          "kv_sequence": 16384,
+          "qk_head_dim": 192,
+          "v_head_dim": 128,
+          "mask": "packed_document_causal",
+          "documents": 2,
+          "layout": "torchtitan_transposed_bhsd"
+        }
+      ]
+    }
+  }
+}
